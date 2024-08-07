@@ -3,9 +3,10 @@ import { StationService } from '@/services/StationService'
 
 defineProps(['station'])
 
-function handleDelete(event, stationId) {
+function handleDelete(event, stationId, obj) {
   if (StationService.destroy(stationId)) {
     alert('Deletado com sucesso')
+    obj.$emit('deleteStation', stationId);
   } else {
     alert('Erro ao deletar')
   }
@@ -20,7 +21,7 @@ function handleDelete(event, stationId) {
         {{ station.resume }}
       </p>
       <a href="#" class="card-link text-primary">Editar</a>
-      <button type="button" @click="handleDelete(event, station._id)" class="card-link text-danger">Excluir</button>
+      <button type="button" @click="handleDelete(event, station._id, this)" class="card-link text-danger">Excluir</button>
     </div>
   </div>
 </template>

@@ -18,6 +18,20 @@ onMounted(async () => {
 watch(stations, async () => {
   loading.value = false
 })
+
+function remove_station(id) {
+    let i = 0;
+
+    console.log("fooi")
+
+    for (i = 0; i < stations.value.length; ++i) {
+        console.log(id)
+        console.log(stations.value[i]._id)
+
+        stations.value = stations.value.filter((obj) => { return obj._id != id })
+    }
+}
+
 </script>
 
 <template>
@@ -42,7 +56,7 @@ watch(stations, async () => {
         <span class="visually-hidden">Loading...</span>
       </div>
       <div class="col" v-for="station in stations" :key="station.id" v-else>
-        <StationCard :station="station" />
+        <StationCard :station="station" @deleteStation="remove_station" />
       </div>
     </div>
   </div>
